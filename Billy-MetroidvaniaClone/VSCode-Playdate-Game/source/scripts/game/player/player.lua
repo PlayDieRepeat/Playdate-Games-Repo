@@ -22,7 +22,7 @@ function Player:init(x, y)
     -- Physics Properties
     self.xVelocity = 0
     self.yVelocity = 0
-    self.gravity = 0.0125
+    self.gravity = 0.125
     self.maxSpeed = 2
     self.jumpVelocity = -3
     self.drag = 0.1
