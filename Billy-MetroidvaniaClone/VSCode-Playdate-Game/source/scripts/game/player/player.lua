@@ -22,7 +22,7 @@ function Player:init(x, y)
     -- Physics Properties
     self.xVelocity = 0
     self.yVelocity = 0
-    self.gravity = 0.125
+    self.gravity = 0.0125
     self.maxSpeed = 2
     self.jumpVelocity = -3
     self.drag = 0.1
@@ -57,6 +57,7 @@ function Player:handleState()
             self:changeToIdleState()
         end
         self:applyGravity()
+        self:applyDrag(self.drag)
         self:handleAirInput()
     end
 end
@@ -65,10 +66,19 @@ function Player:handleMovementAndCollisions()
     local _, _, collisions, length = self:moveWithCollisions(self.x + self.xVelocity, self.y + self.yVelocity)
 
     self.touchingGround = false
+    self.touchingCeiling = false
+    self.touchingWall = false
+
     for i=1,length do
         local collision = collisions[i]
         if collision.normal.y == -1 then
             self.touchingGround = true
+        elseif collision.normal.y == 1 then
+            self.touchingCeiling = true
+        end
+
+        if collision.normal.x ~= 0 then --checking that the x axis collision is not 0
+            self.touchingWall = true
         end
     end
 
@@ -125,7 +135,19 @@ end
 -- Physics Helper Functions
 function Player:applyGravity()
     self.yVelocity += self.gravity
-    if self.touchingGround then
+    if self.touchingGround or self.touchingCeiling then
         self.yVelocity = 0
     end    
+end
+
+function Player:applyDrag(amount)
+    if self.xVelocity > 0 then
+        self.xVelocity -= amount
+    elseif self.xVelocity < 0 then
+        self.xVelocity += amount
+    end
+
+    if math.abs(self.xVelocity) < self.minimumAirSpeed or self.touchingWall then
+        self.xVelocity = 0
+    end
 end

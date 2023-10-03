@@ -20,7 +20,6 @@ local gfx <const> = pd.graphics
 
 --GLOBAL VARS eventually move these to the globals CLASSSES
 
-
 function pd.update()
 	gfx.sprite.update()
 	pd.timer.updateTimers()
