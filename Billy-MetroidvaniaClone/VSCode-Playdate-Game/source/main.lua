@@ -13,6 +13,7 @@ import "scripts/game/scenes/rooms/gameScene"
 import "scripts/game/player/player"
 import "scripts/spike"
 import "scripts/spikeball"
+import "scripts/ability"
 
 GameScene()
 
