@@ -15,19 +15,39 @@ Z_INDEXES = {
 -- load the level
 ldtk.load("levels/metro.ldtk", false)
 
-class('Room1').extends()
+class('GameScene').extends()
 
-function Room1:init()
+function GameScene:init()
     self:goToLevel("Level_0")
     self.spawnX = 6 * 16
     self.spawnY = 10 * 16
 
-    self.player = Player(self.spawnX, self.spawnY)
+    self.player = Player(self.spawnX, self.spawnY, self)
 end
 
-function Room1:goToLevel(levelName)
+function GameScene:enterRoom(direction)
+    local level = ldtk.get_neighbours(self.levelName, direction)[1]
+    self:goToLevel(level)
+    self.player:add()
+    local spawnX, spawnY
+    if direction == "north" then
+        spawnX, spawnY = self.player.x, 240
+    elseif direction == "south" then
+        spawnX, spawnY = self.player.x, 0
+    elseif direction == "east" then
+        spawnX, spawnY = 0, self.player.y
+    elseif direction == "west" then
+        spawnX, spawnY = 400, self.player.y
+    end
+    self.player:moveTo(spawnX, spawnY)
+    self.spawnX = spawnX
+    self.spawnY = spawnY
+end
+
+function GameScene:goToLevel(levelName)
     gfx.sprite.removeAll() --clears the level
 
+    self.levelName = levelName
     for layerName, layer in pairs(ldtk.get_layers(levelName)) do
         if layer.tiles then
             local tilemap = ldtk.create_tilemap(levelName, layerName)

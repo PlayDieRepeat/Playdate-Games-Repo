@@ -1,4 +1,4 @@
-import "scripts/game/scenes/rooms/room1"
+import "scripts/game/scenes/rooms/GameScene"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -19,7 +19,7 @@ end
 
 function GameOverScene:update()
     if pd.buttonJustPressed(pd.kButtonA) then --shortcut to test scene manager
-        SCENE_MANAGER:switchScene(Room1)
+        SCENE_MANAGER:switchScene(GameScene)
     end
 end
 

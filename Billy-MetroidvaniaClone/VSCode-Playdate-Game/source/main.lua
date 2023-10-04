@@ -9,10 +9,10 @@ import "scripts/libraries/AnimatedSprite"
 import "scripts/libraries/LDtk.lua"
 
 --IMPORT CLASSSES
-import "scripts/game/scenes/rooms/Room1"
+import "scripts/game/scenes/rooms/gameScene"
 import "scripts/game/player/player"
 
-Room1()
+GameScene()
 
 --DECLARE CONSTANTS
 local pd <const> = playdate
