@@ -1028,6 +1028,22 @@
 								}] },
 								{ "__identifier": "pickedUp", "__type": "Bool", "__value": false, "__tile": null, "defUid": 37, "realEditorValues": [] }
 							]
+						},
+						{
+							"__identifier": "Spike",
+							"__grid": [9,11],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"__worldX": 144,
+							"__worldY": 176,
+							"iid": "39922ef0-3b70-11ee-bdd1-977a162ad845",
+							"width": 16,
+							"height": 16,
+							"defUid": 26,
+							"px": [144,176],
+							"fieldInstances": []
 						}
 					]
 				},

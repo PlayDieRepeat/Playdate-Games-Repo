@@ -16,8 +16,14 @@ Z_INDEXES = {
     Pickup = 50
 }
 
+local usePrecomputedLevels = not playdate.isSimulator
+
 -- load the level
-ldtk.load("levels/metro.ldtk", false)
+ldtk.load("levels/metro.ldtk", usePrecomputedLevels)
+
+if playdate.isSimulator then
+    ldtk.export_to_lua_files()
+end
 
 class('GameScene').extends()
 
