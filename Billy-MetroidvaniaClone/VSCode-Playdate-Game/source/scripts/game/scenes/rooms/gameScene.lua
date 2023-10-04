@@ -5,11 +5,13 @@ local gfx <const> = pd.graphics
 local ldtk <const> = LDtk
 
 TAGS = {
-    Player = 1
+    Player = 1,
+    Hazard = 2
 }
 
 Z_INDEXES = {
-    Player = 100
+    Player = 100,
+    Hazard = 20
 }
 
 -- load the level
@@ -23,6 +25,10 @@ function GameScene:init()
     self.spawnY = 10 * 16
 
     self.player = Player(self.spawnX, self.spawnY, self)
+end
+
+function GameScene:resetPlayer()
+    self.player:moveTo(self.spawnX, self.spawnY)
 end
 
 function GameScene:enterRoom(direction)
@@ -63,6 +69,16 @@ function GameScene:goToLevel(levelName)
             if emptyTiles then
                 gfx.sprite.addWallSprites(tilemap, emptyTiles)
             end
+        end
+    end
+
+    for _, entity in ipairs(ldtk.get_entities(levelName)) do
+        local entityX, entityY = entity.position.x, entity.position.y
+        local entityName = entity.name
+        if entityName == "Spike" then
+            Spike(entityX, entityY)
+        elseif entityName == "Spikeball" then
+            Spikeball(entityX, entityY, entity)
         end
     end
 end

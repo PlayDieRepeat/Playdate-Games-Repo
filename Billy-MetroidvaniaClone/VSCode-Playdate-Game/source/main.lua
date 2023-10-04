@@ -11,6 +11,8 @@ import "scripts/libraries/LDtk.lua"
 --IMPORT CLASSSES
 import "scripts/game/scenes/rooms/gameScene"
 import "scripts/game/player/player"
+import "scripts/spike"
+import "scripts/spikeball"
 
 GameScene()
 
